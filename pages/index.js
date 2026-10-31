@@ -16,28 +16,24 @@ addTodoFormValidator.enableValidation();
 
 const todoCounter = new TodoCounter(initialTodos, ".counter__text");
 
-const addTodoPopup = new PopupWithForm(
-  "#add-todo-popup",
-  (formData) => {
-    const date = new Date(formData.date);
-    date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+const addTodoPopup = new PopupWithForm("#add-todo-popup", (formData) => {
+  const date = new Date(formData.date);
+  date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
 
-    const values = {
-      id: uuidv4(),
-      name: formData.name,
-      date,
-      completed: false,
-    };
+  const values = {
+    id: uuidv4(),
+    name: formData.name,
+    date,
+    completed: false,
+  };
 
-    todoSection.addItem(generateTodo(values));
+  todoSection.addItem(generateTodo(values));
 
-    todoCounter.updateTotal(true);
+  todoCounter.updateTotal(true);
 
-    addTodoForm.reset();
-    addTodoFormValidator.resetValidation();
-    addTodoPopup.close();
-  }
-);
+  addTodoFormValidator.resetValidation();
+  addTodoPopup.close();
+});
 
 addTodoPopup.setEventListeners();
 
@@ -60,7 +56,7 @@ const generateTodo = (data) => {
       }
 
       todoCounter.updateTotal(false);
-    }
+    },
   );
 
   return todo.getView();

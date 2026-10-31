@@ -17,11 +17,13 @@ export default class Todo {
       .cloneNode(true);
 
     return todoElement;
+
   }
 
   _setEventListeners() {
     this._todoDeleteBtn.addEventListener("click", () => {
       this._handleDelete(this._completed);
+      
       this._element.remove();
     });
 
